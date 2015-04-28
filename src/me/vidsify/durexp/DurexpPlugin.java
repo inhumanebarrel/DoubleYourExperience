@@ -29,8 +29,8 @@ public class DurexpPlugin extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        saveDefaultConfig();
-        loadConfiguration();
+        getConfig().options().copyDefaults(true);
+        saveConfig();
         PluginDescriptionFile pdffile = getDescription();
         getServer().getPluginManager().registerEvents(new PlayerExpListener(this), this);
         getCommand("durexp").setExecutor(new DurexpExecutor(this));
@@ -54,6 +54,7 @@ public class DurexpPlugin extends JavaPlugin implements Listener {
 
     @Override
     public void onDisable() {
+        reloadConfig();
         saveConfig();
     }
 
